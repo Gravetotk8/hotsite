@@ -1,11 +1,11 @@
 <?php
-$nome_completo = $_REQUEST['nome'];
+$nome = $_REQUEST['nome'];
 $telefone = $_REQUEST['telefone'];
 
 //filter (segurança)
 //php.net/input_filter
 
-$nome_completo = filter_input(INPUT_POST, 'nome', FILTER_UNSAFE_RAW);
+$nome = filter_input(INPUT_POST, 'nome', FILTER_UNSAFE_RAW);
 $telefone = filter_input(INPUT_POST, 'telefone', FILTER_UNSAFE_RAW);
 
 //#####validação#####
@@ -27,7 +27,7 @@ if (empty($nome)) {
     
     conexao();
     
-    $sql = "insert into usuario(nome, telefone) values('$nome_completo','$telefone')";
+    $sql = "insert into coca(nome, telefone) values('$nome','$telefone')";
     $resultado = execute($sql);
 
     if (!$resultado) {
@@ -36,5 +36,5 @@ if (empty($nome)) {
 
     $id = busca_id();
 
-    echo "Parabens já esta participando: $id";
+    header("Location: /estoque?id=$id");
 }
